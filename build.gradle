@@ -29,7 +29,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
-    implementation 'org.hsqldb:hsqldb'
+    compileOnly 'org.hsqldb:hsqldb'   // Add this for compile-time access
+    runtimeOnly 'org.hsqldb:hsqldb'   // Keep this for runtime
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
