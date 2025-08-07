@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler;
+package ee.tiiukuusik.lessonScheduler.persistence.user;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

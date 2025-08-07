@@ -1,5 +1,8 @@
-package ee.tiiukuusik.lessonScheduler;
+package ee.tiiukuusik.lessonScheduler.persistence.booking;
 
+import ee.tiiukuusik.lessonScheduler.persistence.lessontype.LessonType;
+import ee.tiiukuusik.lessonScheduler.persistence.timeslot.TimeSlot;
+import ee.tiiukuusik.lessonScheduler.persistence.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
