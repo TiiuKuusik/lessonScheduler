@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Error {
-    SOME_ERROR_ENUM("Some error message");
+    BOOKING_DOES_NOT_EXIST("No booking found with entered id");
 
     private final String message;
 }

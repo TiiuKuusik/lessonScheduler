@@ -1,8 +1,12 @@
 package ee.tiiukuusik.lessonScheduler.controller.booking.dto;
 
 import ee.tiiukuusik.lessonScheduler.persistence.booking.Booking;
+import ee.tiiukuusik.lessonScheduler.persistence.lessontype.LessonType;
+import ee.tiiukuusik.lessonScheduler.persistence.timeslot.TimeSlot;
+import ee.tiiukuusik.lessonScheduler.persistence.user.User;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -11,18 +15,17 @@ import java.time.Instant;
 /**
  * DTO for {@link Booking}
  */
-@Value
+@Data
 public class BookingDto implements Serializable {
-    Integer id;
     @NotNull
-    Instant bookingDate;
+    private Instant bookingDate;
     @NotNull
     @Size(max = 20)
-    String status;
+    private String status;
     @NotNull
-    Integer timeSlotId;
+    private Instant timeSlot;
     @NotNull
-    Integer lessonTypeId;
+    private String lessonType;
     @NotNull
-    Integer userId;
+    private String user;
 }
