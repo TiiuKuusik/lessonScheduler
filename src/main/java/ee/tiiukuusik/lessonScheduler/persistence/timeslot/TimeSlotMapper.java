@@ -1,6 +1,6 @@
 package ee.tiiukuusik.lessonScheduler.persistence.timeslot;
 
-import ee.tiiukuusik.lessonScheduler.controller.dto.TimeSlotDto;
+import ee.tiiukuusik.lessonScheduler.controller.timeslot.dto.TimeSlotDto;
 import org.mapstruct.Mapper;
 
 import java.util.List;

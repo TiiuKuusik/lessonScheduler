@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler.controller.dto;
+package ee.tiiukuusik.lessonScheduler.controller.timeslot.dto;
 
 import ee.tiiukuusik.lessonScheduler.persistence.timeslot.TimeSlot;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +12,7 @@ import java.time.Instant;
  */
 @Value
 public class TimeSlotDto implements Serializable {
-    Integer id;
+
     @NotNull
     Instant startDatetime;
     @NotNull
