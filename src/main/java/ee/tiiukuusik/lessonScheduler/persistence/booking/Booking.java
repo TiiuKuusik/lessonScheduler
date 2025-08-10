@@ -2,7 +2,7 @@ package ee.tiiukuusik.lessonScheduler.persistence.booking;
 
 import ee.tiiukuusik.lessonScheduler.persistence.lessontype.LessonType;
 import ee.tiiukuusik.lessonScheduler.persistence.timeslot.TimeSlot;
-import ee.tiiukuusik.lessonScheduler.persistence.user.User;
+import ee.tiiukuusik.lessonScheduler.persistence.customer.Customer;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -44,7 +44,7 @@ public class Booking {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "USER_ID", nullable = false)
-    private User user;
+    @JoinColumn(name = "CUSTOMER_ID", nullable = false)
+    private Customer customer;
 
 }

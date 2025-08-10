@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler.persistence.user;
+package ee.tiiukuusik.lessonScheduler.persistence.customer;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -10,8 +10,8 @@ import org.hibernate.annotations.ColumnDefault;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "customer")
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
@@ -39,7 +39,7 @@ public class User {
 
     @Size(max = 10)
     @NotNull
-    @ColumnDefault("'user'")
+    @ColumnDefault("'customer'")
     @Column(name = "ROLE", nullable = false, length = 10)
     private String role;
 

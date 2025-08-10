@@ -4,12 +4,12 @@
 -- tables
 -- Table: booking
 CREATE TABLE booking (
-                         id INTEGER IDENTITY PRIMARY KEY,
+                         id int GENERATED ALWAYS AS IDENTITY (START WITH 1) NOT NULL,
                          booking_date TIMESTAMP NOT NULL,
                          status VARCHAR(20) NOT NULL,
                          time_slot_id INTEGER NOT NULL,
                          lesson_type_id INTEGER NOT NULL,
-                         user_id INTEGER NOT NULL
+                         customer_id INTEGER NOT NULL
 );
 
 -- Table: lesson_type
@@ -30,8 +30,8 @@ CREATE TABLE time_slot (
                            is_available boolean NOT NULL,
 );
 
--- Table: user
-CREATE TABLE "user" (
+-- Table: customer
+CREATE TABLE customer (
                         id INTEGER IDENTITY PRIMARY KEY,
                         first_name varchar(50) NOT NULL,
                         last_name varchar(50) NOT NULL,
@@ -53,16 +53,16 @@ ALTER TABLE booking ADD CONSTRAINT booking_time_slot
         REFERENCES time_slot (id);
 
 -- Reference: booking_user (table: booking)
-ALTER TABLE booking ADD CONSTRAINT booking_user
-    FOREIGN KEY (user_id)
-        REFERENCES "user" (id);
+ALTER TABLE booking ADD CONSTRAINT booking_customer
+    FOREIGN KEY (customer_id)
+        REFERENCES customer (id);
 
 -- Add default values after table creation
 ALTER TABLE lesson_type
     ALTER COLUMN duration_minutes SET DEFAULT 120;
 
-ALTER TABLE "user"
-    ALTER COLUMN role SET DEFAULT 'user';
+ALTER TABLE customer
+    ALTER COLUMN role SET DEFAULT 'customer';
 
 -- Add the default value
 ALTER TABLE booking
@@ -73,9 +73,9 @@ ALTER TABLE booking
     ADD CONSTRAINT status_check
         CHECK (status IN ('pending', 'confirmed', 'cancelled', 'completed'));
 
-ALTER TABLE "user"
+ALTER TABLE customer
     ADD CONSTRAINT role_check
-        CHECK (role IN ('admin', 'user'));
+        CHECK (role IN ('admin', 'customer'));
 
 
 -- End of file.

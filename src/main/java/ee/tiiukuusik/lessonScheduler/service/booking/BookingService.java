@@ -1,6 +1,7 @@
 package ee.tiiukuusik.lessonScheduler.service.booking;
 
 import ee.tiiukuusik.lessonScheduler.controller.booking.dto.BookingDto;
+import ee.tiiukuusik.lessonScheduler.controller.booking.dto.BookingInfo;
 import ee.tiiukuusik.lessonScheduler.infrastructure.rest.error.Error;
 import ee.tiiukuusik.lessonScheduler.infrastructure.rest.exception.DataNotFoundException;
 import ee.tiiukuusik.lessonScheduler.persistence.booking.Booking;
@@ -8,6 +9,8 @@ import ee.tiiukuusik.lessonScheduler.persistence.booking.BookingMapper;
 import ee.tiiukuusik.lessonScheduler.persistence.booking.BookingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +22,11 @@ public class BookingService {
     public BookingDto findBooking(Integer id) {
         Booking booking = bookingRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(Error.BOOKING_DOES_NOT_EXIST.getMessage()));
-        return bookingMapper.toDto(booking);
+        return bookingMapper.toBookingDto(booking);
+    }
+
+    public List<BookingInfo> findAllBookings() {
+        List<Booking> bookings = bookingRepository.findAll();
+        return bookingMapper.toBookingInfos(bookings);
     }
 }

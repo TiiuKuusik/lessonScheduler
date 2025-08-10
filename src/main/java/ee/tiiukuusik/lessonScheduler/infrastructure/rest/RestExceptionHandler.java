@@ -24,7 +24,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
-     * Handles cases where a user is not allowed to perform an action.
+     * Handles cases where a customer is not allowed to perform an action.
      * Produces a 403 Forbidden response with an error message and request path.
      */
     @ExceptionHandler(ForbiddenException.class)

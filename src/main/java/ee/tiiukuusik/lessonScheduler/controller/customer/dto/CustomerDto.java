@@ -1,6 +1,6 @@
-package ee.tiiukuusik.lessonScheduler.controller.user.dto;
+package ee.tiiukuusik.lessonScheduler.controller.customer.dto;
 
-import ee.tiiukuusik.lessonScheduler.persistence.user.User;
+import ee.tiiukuusik.lessonScheduler.persistence.customer.Customer;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Value;
@@ -8,10 +8,10 @@ import lombok.Value;
 import java.io.Serializable;
 
 /**
- * DTO for {@link User}
+ * DTO for {@link Customer}
  */
 @Value
-public class UserDto implements Serializable {
+public class CustomerDto implements Serializable {
     Integer id;
     @NotNull
     @Size(max = 50)
