@@ -4,6 +4,7 @@ import ee.tiiukuusik.lessonScheduler.controller.booking.dto.BookingDto;
 import ee.tiiukuusik.lessonScheduler.controller.booking.dto.BookingInfo;
 import ee.tiiukuusik.lessonScheduler.infrastructure.rest.error.Error;
 import ee.tiiukuusik.lessonScheduler.infrastructure.rest.exception.DataNotFoundException;
+import ee.tiiukuusik.lessonScheduler.infrastructure.rest.exception.ForbiddenException;
 import ee.tiiukuusik.lessonScheduler.persistence.booking.Booking;
 import ee.tiiukuusik.lessonScheduler.persistence.booking.BookingMapper;
 import ee.tiiukuusik.lessonScheduler.persistence.booking.BookingRepository;
@@ -30,21 +31,28 @@ public class BookingService {
 
 
     public void addBooking(BookingDto bookingDto) {
-       TimeSlot timeSlot = timeSlotRepository.findByStartDatetimeIgnoreSeconds(bookingDto.getStartDatetime())
+       TimeSlot timeSlot = timeSlotRepository.findByStartDatetime(bookingDto.getStartDatetime())
                 .orElseThrow(() -> new DataNotFoundException(Error.START_TIME_DOES_NOT_EXIST.getMessage()));
-       LessonType lessonType = lessonTypeRepository.findLessonTypeBy(bookingDto.getLessonType())
+
+        if (Boolean.FALSE.equals(timeSlot.getIsAvailable())) {
+            throw new ForbiddenException("Requested Time slot is not available");
+        }
+
+        LessonType lessonType = lessonTypeRepository.findLessonTypeBy(bookingDto.getLessonType())
                 .orElseThrow(() -> new DataNotFoundException(Error.LESSON_TYPE_DOES_NOT_EXIST.getMessage()));
        Customer customer = customerRepository.findByEmail(bookingDto.getCustomer())
                .orElseThrow(() -> new DataNotFoundException(Error.CUSTOMER_DOES_NOT_EXIST.getMessage()));
-
-       bookingMapper.toBooking(bookingDto);
 
         Booking booking = bookingMapper.toBooking(bookingDto);
         booking.setTimeSlot(timeSlot);
         booking.setLessonType(lessonType);
         booking.setCustomer(customer);
-        bookingRepository.save(booking);
+        booking.setStatus("pending");
 
+        // Set the time slot as not available
+        timeSlot.setIsAvailable(false);
+        timeSlotRepository.save(timeSlot);
+        bookingRepository.save(booking);
     }
 
 

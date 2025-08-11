@@ -22,7 +22,7 @@ public class BookingController {
     private final BookingService bookingService;
 
     @PostMapping("/booking")
-    @Operation(summary = "Adds a booking", description = "Adds a booking.Throws an error if startDateTime, lessonType or customer is not found")
+    @Operation(summary = "Adds a booking", description = "Adds a booking. Throws an error if startDateTime, lessonType or customer is not found")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "Invalid request body",
