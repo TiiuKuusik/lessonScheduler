@@ -13,9 +13,9 @@ public interface BookingMapper {
 
     @Mapping(source = "bookingDate", target = "bookingDate")
     @Mapping(source = "lessonType.typeName", target = "lessonType")
-    @Mapping(source = "status", target = "status")
-    @Mapping(source = "timeSlot.startDatetime", target = "timeSlot")
-    @Mapping(source = "customer.email", target = "user")
+    //@Mapping(source = "status", target = "status")
+    @Mapping(source = "timeSlot.startDatetime", target = "startDatetime")
+    @Mapping(source = "customer.email", target = "customer")
     BookingDto toBookingDto(Booking booking);
 
 
@@ -28,4 +28,10 @@ public interface BookingMapper {
 
 
 
+    //@Mapping(source = "status", target = "status")
+    @Mapping(source = "bookingDate", target = "bookingDate")
+    @Mapping(ignore = true, target = "timeSlot")
+    @Mapping(ignore = true, target = "lessonType")
+    @Mapping(ignore = true, target = "customer")
+    Booking toBooking(BookingDto bookingDto);
 }

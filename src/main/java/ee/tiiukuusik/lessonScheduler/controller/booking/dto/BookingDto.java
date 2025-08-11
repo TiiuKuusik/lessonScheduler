@@ -19,13 +19,13 @@ import java.time.Instant;
 public class BookingDto implements Serializable {
     @NotNull
     private Instant bookingDate;
+//    @NotNull
+//    @Size(max = 20)
+//    private String status;
     @NotNull
-    @Size(max = 20)
-    private String status;
-    @NotNull
-    private Instant timeSlot;
+    private Instant startDatetime;
     @NotNull
     private String lessonType;
     @NotNull
-    private String user;
+    private String customer;
 }
