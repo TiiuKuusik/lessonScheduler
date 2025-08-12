@@ -2,9 +2,11 @@ package ee.tiiukuusik.lessonscheduler.service.timeslot;
 
 
 import ee.tiiukuusik.lessonscheduler.controller.timeslot.dto.TimeSlotDto;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception.DataNotFoundException;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlot;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotMapper;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotRepository;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.error.Error;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +30,11 @@ public class TimeSlotService {
         return timeSlotMapper.toDtoList(timeSlots);
     }
 
-    public void updateTimeSlot(TimeSlotDto timeSlotDto) {
-        TimeSlot timeSlot = timeSlotMapper.toTimeSlot(timeSlotDto);
-        timeSlotRepository.save(timeSlot);
+    public void updateTimeSlot(Integer id, TimeSlotDto timeSlotDto) {
+        TimeSlot existingTimeSlot = timeSlotRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(Error.TIME_SLOT_DOES_NOT_EXIST.getMessage()));
+        TimeSlot updatedTimeSlot = timeSlotMapper.toTimeSlot(timeSlotDto);
+        updatedTimeSlot.setId(existingTimeSlot.getId()); // Preserve the ID
+        timeSlotRepository.save(updatedTimeSlot);
     }
 }
