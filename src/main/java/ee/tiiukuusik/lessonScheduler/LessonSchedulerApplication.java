@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler;
+package ee.tiiukuusik.lessonscheduler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

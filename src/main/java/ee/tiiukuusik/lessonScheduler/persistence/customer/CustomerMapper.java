@@ -1,6 +1,6 @@
-package ee.tiiukuusik.lessonScheduler.persistence.customer;
+package ee.tiiukuusik.lessonscheduler.persistence.customer;
 
-import ee.tiiukuusik.lessonScheduler.controller.customer.dto.CustomerDto;
+import ee.tiiukuusik.lessonscheduler.controller.customer.dto.CustomerDto;
 
 import java.util.List;
 

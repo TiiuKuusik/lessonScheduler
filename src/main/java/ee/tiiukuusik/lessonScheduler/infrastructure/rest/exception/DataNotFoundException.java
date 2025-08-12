@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler.infrastructure.rest.exception;
+package ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception;
 
 import lombok.Getter;
 

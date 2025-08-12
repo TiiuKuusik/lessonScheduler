@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler.persistence.customer;
+package ee.tiiukuusik.lessonscheduler.persistence.customer;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

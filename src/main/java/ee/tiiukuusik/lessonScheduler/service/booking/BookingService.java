@@ -1,21 +1,22 @@
-package ee.tiiukuusik.lessonScheduler.service.booking;
+package ee.tiiukuusik.lessonscheduler.service.booking;
 
-import ee.tiiukuusik.lessonScheduler.controller.booking.dto.BookingDto;
-import ee.tiiukuusik.lessonScheduler.controller.booking.dto.BookingInfo;
-import ee.tiiukuusik.lessonScheduler.infrastructure.rest.error.Error;
-import ee.tiiukuusik.lessonScheduler.infrastructure.rest.exception.DataNotFoundException;
-import ee.tiiukuusik.lessonScheduler.infrastructure.rest.exception.ForbiddenException;
-import ee.tiiukuusik.lessonScheduler.persistence.booking.Booking;
-import ee.tiiukuusik.lessonScheduler.persistence.booking.BookingMapper;
-import ee.tiiukuusik.lessonScheduler.persistence.booking.BookingRepository;
-import ee.tiiukuusik.lessonScheduler.persistence.customer.Customer;
-import ee.tiiukuusik.lessonScheduler.persistence.customer.CustomerRepository;
-import ee.tiiukuusik.lessonScheduler.persistence.lessontype.LessonType;
-import ee.tiiukuusik.lessonScheduler.persistence.lessontype.LessonTypeRepository;
-import ee.tiiukuusik.lessonScheduler.persistence.timeslot.TimeSlot;
-import ee.tiiukuusik.lessonScheduler.persistence.timeslot.TimeSlotRepository;
+import ee.tiiukuusik.lessonscheduler.controller.booking.dto.BookingDto;
+import ee.tiiukuusik.lessonscheduler.controller.booking.dto.BookingInfo;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.error.Error;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception.DataNotFoundException;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception.ForbiddenException;
+import ee.tiiukuusik.lessonscheduler.persistence.booking.Booking;
+import ee.tiiukuusik.lessonscheduler.persistence.booking.BookingMapper;
+import ee.tiiukuusik.lessonscheduler.persistence.booking.BookingRepository;
+import ee.tiiukuusik.lessonscheduler.persistence.customer.Customer;
+import ee.tiiukuusik.lessonscheduler.persistence.customer.CustomerRepository;
+import ee.tiiukuusik.lessonscheduler.persistence.lessontype.LessonType;
+import ee.tiiukuusik.lessonscheduler.persistence.lessontype.LessonTypeRepository;
+import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlot;
+import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 

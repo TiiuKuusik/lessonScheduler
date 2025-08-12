@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler;
+package ee.tiiukuusik.lessonscheduler;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

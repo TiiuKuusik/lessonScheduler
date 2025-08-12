@@ -1,7 +1,7 @@
-package ee.tiiukuusik.lessonScheduler.controller.timeslot;
+package ee.tiiukuusik.lessonscheduler.controller.timeslot;
 
-import ee.tiiukuusik.lessonScheduler.controller.timeslot.dto.TimeSlotDto;
-import ee.tiiukuusik.lessonScheduler.service.timeslot.TimeSlotService;
+import ee.tiiukuusik.lessonscheduler.controller.timeslot.dto.TimeSlotDto;
+import ee.tiiukuusik.lessonscheduler.service.timeslot.TimeSlotService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,7 @@
-package ee.tiiukuusik.lessonScheduler.persistence.booking;
+package ee.tiiukuusik.lessonscheduler.persistence.booking;
 
-import ee.tiiukuusik.lessonScheduler.controller.booking.dto.BookingDto;
-import ee.tiiukuusik.lessonScheduler.controller.booking.dto.BookingInfo;
+import ee.tiiukuusik.lessonscheduler.controller.booking.dto.BookingDto;
+import ee.tiiukuusik.lessonscheduler.controller.booking.dto.BookingInfo;
 import org.mapstruct.*;
 
 import java.util.List;

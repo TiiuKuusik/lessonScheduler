@@ -1,8 +1,8 @@
-package ee.tiiukuusik.lessonScheduler.infrastructure.rest;
+package ee.tiiukuusik.lessonscheduler.infrastructure.rest;
 
-import ee.tiiukuusik.lessonScheduler.infrastructure.rest.error.ApiError;
-import ee.tiiukuusik.lessonScheduler.infrastructure.rest.exception.DataNotFoundException;
-import ee.tiiukuusik.lessonScheduler.infrastructure.rest.exception.ForbiddenException;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.error.ApiError;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception.DataNotFoundException;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception.ForbiddenException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

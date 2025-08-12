@@ -1,10 +1,10 @@
-package ee.tiiukuusik.lessonScheduler.service.timeslot;
+package ee.tiiukuusik.lessonscheduler.service.timeslot;
 
 
-import ee.tiiukuusik.lessonScheduler.controller.timeslot.dto.TimeSlotDto;
-import ee.tiiukuusik.lessonScheduler.persistence.timeslot.TimeSlot;
-import ee.tiiukuusik.lessonScheduler.persistence.timeslot.TimeSlotMapper;
-import ee.tiiukuusik.lessonScheduler.persistence.timeslot.TimeSlotRepository;
+import ee.tiiukuusik.lessonscheduler.controller.timeslot.dto.TimeSlotDto;
+import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlot;
+import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotMapper;
+import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package ee.tiiukuusik.lessonScheduler.controller.booking.dto;
+package ee.tiiukuusik.lessonscheduler.controller.booking.dto;
 
-import ee.tiiukuusik.lessonScheduler.persistence.booking.Booking;
+import ee.tiiukuusik.lessonscheduler.persistence.booking.Booking;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;

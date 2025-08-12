@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler.persistence.timeslot;
+package ee.tiiukuusik.lessonscheduler.persistence.timeslot;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler.controller.customer;
+package ee.tiiukuusik.lessonscheduler.controller.customer;
 
 import org.springframework.web.bind.annotation.RestController;
 

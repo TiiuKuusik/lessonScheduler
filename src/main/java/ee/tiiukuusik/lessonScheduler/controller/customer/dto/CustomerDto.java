@@ -1,6 +1,6 @@
-package ee.tiiukuusik.lessonScheduler.controller.customer.dto;
+package ee.tiiukuusik.lessonscheduler.controller.customer.dto;
 
-import ee.tiiukuusik.lessonScheduler.persistence.customer.Customer;
+import ee.tiiukuusik.lessonscheduler.persistence.customer.Customer;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Value;

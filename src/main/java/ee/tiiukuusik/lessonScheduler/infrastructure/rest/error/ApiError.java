@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler.infrastructure.rest.error;
+package ee.tiiukuusik.lessonscheduler.infrastructure.rest.error;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

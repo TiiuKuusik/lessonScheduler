@@ -1,4 +1,4 @@
-package ee.tiiukuusik.lessonScheduler.infrastructure.db;
+package ee.tiiukuusik.lessonscheduler.infrastructure.db;
 
 import org.hsqldb.server.Server;
 import org.slf4j.Logger;

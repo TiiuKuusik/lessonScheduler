@@ -1,9 +1,9 @@
-package ee.tiiukuusik.lessonScheduler.controller.booking;
+package ee.tiiukuusik.lessonscheduler.controller.booking;
 
-import ee.tiiukuusik.lessonScheduler.controller.booking.dto.BookingDto;
-import ee.tiiukuusik.lessonScheduler.controller.booking.dto.BookingInfo;
-import ee.tiiukuusik.lessonScheduler.infrastructure.rest.error.ApiError;
-import ee.tiiukuusik.lessonScheduler.service.booking.BookingService;
+import ee.tiiukuusik.lessonscheduler.controller.booking.dto.BookingDto;
+import ee.tiiukuusik.lessonscheduler.controller.booking.dto.BookingInfo;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.error.ApiError;
+import ee.tiiukuusik.lessonscheduler.service.booking.BookingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

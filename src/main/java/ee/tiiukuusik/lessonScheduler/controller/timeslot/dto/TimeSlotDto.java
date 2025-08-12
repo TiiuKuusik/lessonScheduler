@@ -1,6 +1,6 @@
-package ee.tiiukuusik.lessonScheduler.controller.timeslot.dto;
+package ee.tiiukuusik.lessonscheduler.controller.timeslot.dto;
 
-import ee.tiiukuusik.lessonScheduler.persistence.timeslot.TimeSlot;
+import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlot;
 import jakarta.validation.constraints.NotNull;
 import lombok.Value;
 
