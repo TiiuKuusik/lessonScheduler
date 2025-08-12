@@ -68,4 +68,11 @@ public class BookingController {
     public void updateBooking(@PathVariable Integer id, @RequestBody @Valid BookingDto bookingDto) {
         bookingService.updateBooking(id, bookingDto);
     }
+
+    @DeleteMapping("booking/{id}")
+    public void deleteBooking(@PathVariable Integer id) {
+        bookingService.deleteBooking(id);
+
+    }
+
 }

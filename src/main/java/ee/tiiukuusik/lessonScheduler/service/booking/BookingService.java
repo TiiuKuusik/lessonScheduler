@@ -14,11 +14,8 @@ import ee.tiiukuusik.lessonscheduler.persistence.lessontype.LessonType;
 import ee.tiiukuusik.lessonscheduler.persistence.lessontype.LessonTypeRepository;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlot;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-
 import java.time.Instant;
 import java.util.List;
 
@@ -70,7 +67,12 @@ public class BookingService {
         booking.setLessonType(lessonType);
         booking.setCustomer(customer);
         bookingRepository.save(booking);
+    }
 
+    public void deleteBooking(Integer id) {
+        Booking booking = getValidBooking(id);
+        freeTimeSlotAfterDelete(booking.getTimeSlot());
+        bookingRepository.deleteById(id);
     }
 
     private Booking getValidBooking(Integer id) {
@@ -97,4 +99,8 @@ public class BookingService {
                 .orElseThrow(() -> new DataNotFoundException(Error.CUSTOMER_DOES_NOT_EXIST.getMessage()));
     }
 
+    private void freeTimeSlotAfterDelete(TimeSlot timeSlot) {
+        timeSlot.setIsAvailable(true);
+        timeSlotRepository.save(timeSlot);
+    }
 }

@@ -19,12 +19,17 @@ public class TimeSlotService {
 
 
     public void addTimeSlot(TimeSlotDto timeSlotDto) {
-        TimeSlot timeSlot = timeSlotMapper.toEntity(timeSlotDto);
+        TimeSlot timeSlot = timeSlotMapper.toTimeSlot(timeSlotDto);
         timeSlotRepository.save(timeSlot);
     }
 
     public List<TimeSlotDto> getAllTimeSlots() {
         List<TimeSlot> timeSlots = timeSlotRepository.findAll();
         return timeSlotMapper.toDtoList(timeSlots);
+    }
+
+    public void updateTimeSlot(TimeSlotDto timeSlotDto) {
+        TimeSlot timeSlot = timeSlotMapper.toTimeSlot(timeSlotDto);
+        timeSlotRepository.save(timeSlot);
     }
 }

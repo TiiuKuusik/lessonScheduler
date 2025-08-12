@@ -8,11 +8,11 @@ import java.util.List;
 @Mapper
 public interface TimeSlotMapper {
 
-TimeSlotDto toDto(TimeSlot timeSlot);
+TimeSlotDto toTimeSlotDto(TimeSlot timeSlot);
 
-TimeSlot toEntity(TimeSlotDto timeSlotDto);
+TimeSlot toTimeSlot(TimeSlotDto timeSlotDto);
 
 List<TimeSlotDto> toDtoList(List<TimeSlot> timeSlots);
 
-List<TimeSlot> toEntityList(List<TimeSlotDto> timeSlotDtos);
+List<TimeSlot> toTimeSlotList(List<TimeSlotDto> timeSlotDtos);
 }
