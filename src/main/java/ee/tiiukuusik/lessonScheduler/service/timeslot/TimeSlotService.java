@@ -37,4 +37,8 @@ public class TimeSlotService {
         updatedTimeSlot.setId(existingTimeSlot.getId()); // Preserve the ID
         timeSlotRepository.save(updatedTimeSlot);
     }
+
+    public void deleteTimeSlot(Integer id) {
+        timeSlotRepository.deleteById(id);
+    }
 }

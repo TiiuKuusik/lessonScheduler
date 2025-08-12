@@ -47,4 +47,13 @@ public class TimeSlotController {
     public void updateTimeSlot(@PathVariable Integer id, @RequestBody @Valid TimeSlotDto timeSlotDto) {
         timeSlotService.updateTimeSlot(id, timeSlotDto);
     }
+
+    @DeleteMapping("/timeslot{id}")
+    @Operation(summary = "Delete time slot", description = "Deletes time slot from the database")
+    @ApiResponse(responseCode = "200", description = "Time slot deleted successfully")
+    public void deleteTimeSlot(@PathVariable Integer id) {
+        timeSlotService.deleteTimeSlot(id);
+    }
+
+
 }
