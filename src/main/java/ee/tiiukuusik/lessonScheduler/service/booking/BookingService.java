@@ -14,10 +14,12 @@ import ee.tiiukuusik.lessonscheduler.persistence.lessontype.LessonType;
 import ee.tiiukuusik.lessonscheduler.persistence.lessontype.LessonTypeRepository;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlot;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -32,17 +34,9 @@ public class BookingService {
 
 
     public void addBooking(BookingDto bookingDto) {
-       TimeSlot timeSlot = timeSlotRepository.findByStartDatetime(bookingDto.getStartDatetime())
-                .orElseThrow(() -> new DataNotFoundException(Error.START_TIME_DOES_NOT_EXIST.getMessage()));
-
-        if (Boolean.FALSE.equals(timeSlot.getIsAvailable())) {
-            throw new ForbiddenException("Requested Time slot is not available");
-        }
-
-        LessonType lessonType = lessonTypeRepository.findLessonTypeBy(bookingDto.getLessonType())
-                .orElseThrow(() -> new DataNotFoundException(Error.LESSON_TYPE_DOES_NOT_EXIST.getMessage()));
-       Customer customer = customerRepository.findByEmail(bookingDto.getCustomer())
-               .orElseThrow(() -> new DataNotFoundException(Error.CUSTOMER_DOES_NOT_EXIST.getMessage()));
+        TimeSlot timeSlot = getAvailableTimeSlot(bookingDto.getStartDatetime());
+        LessonType lessonType = getValidLessonType(bookingDto.getLessonType());
+        Customer customer = getValidCustomer(bookingDto.getCustomer());
 
         Booking booking = bookingMapper.toBooking(bookingDto);
         booking.setTimeSlot(timeSlot);
@@ -56,16 +50,51 @@ public class BookingService {
         bookingRepository.save(booking);
     }
 
-
     public BookingDto findBooking(Integer id) {
-        Booking booking = bookingRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(Error.BOOKING_DOES_NOT_EXIST.getMessage()));
+        Booking booking = getValidBooking(id);
         return bookingMapper.toBookingDto(booking);
     }
 
     public List<BookingInfo> findAllBookings() {
         List<Booking> bookings = bookingRepository.findAll();
         return bookingMapper.toBookingInfos(bookings);
+    }
+
+    public void updateBooking(Integer id, BookingDto bookingDto) {
+        Booking booking = getValidBooking(id);
+        TimeSlot timeSlot = getAvailableTimeSlot(bookingDto.getStartDatetime());
+        Customer customer = getValidCustomer(bookingDto.getCustomer());
+        LessonType lessonType = getValidLessonType(bookingDto.getLessonType());
+        bookingMapper.updateBooking(bookingDto, booking);
+        booking.setTimeSlot(timeSlot);
+        booking.setLessonType(lessonType);
+        booking.setCustomer(customer);
+        bookingRepository.save(booking);
+
+    }
+
+    private Booking getValidBooking(Integer id) {
+        return bookingRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(Error.BOOKING_DOES_NOT_EXIST.getMessage()));
+    }
+
+    private TimeSlot getAvailableTimeSlot(Instant startDatetime) {
+        TimeSlot timeSlot = timeSlotRepository.findByStartDatetime(startDatetime)
+                .orElseThrow(() -> new DataNotFoundException(Error.START_TIME_DOES_NOT_EXIST.getMessage()));
+        if (Boolean.FALSE.equals(timeSlot.getIsAvailable())) {
+            throw new ForbiddenException("Requested Time slot is not available");
+        }
+        return timeSlot;
+    }
+
+    private LessonType getValidLessonType(String typeName) {
+        return lessonTypeRepository.findLessonTypeBy(typeName)
+                .orElseThrow(() -> new DataNotFoundException(Error.LESSON_TYPE_DOES_NOT_EXIST.getMessage()));
+    }
+
+    private Customer getValidCustomer(String email) {
+        return customerRepository.findCustomerBy(email)
+                .orElseThrow(() -> new DataNotFoundException(Error.CUSTOMER_DOES_NOT_EXIST.getMessage()));
     }
 
 }

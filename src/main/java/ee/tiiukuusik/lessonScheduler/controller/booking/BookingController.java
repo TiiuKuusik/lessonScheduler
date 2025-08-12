@@ -34,8 +34,6 @@ public class BookingController {
         bookingService.addBooking(bookingDto);
     }
 
-
-
     @GetMapping("/booking/{id}")
     @Operation(summary = "Find a booking by id", description = "Finds a booking by id from the database. If not found, throws an error")
     @ApiResponses(value = {
@@ -54,5 +52,20 @@ public class BookingController {
     public List<BookingInfo> findAllBookings() {
             return bookingService.findAllBookings();
             }
-}
 
+
+    @PutMapping("booking/{id}")
+    @Operation(summary = "Update booking by id", description = "Updates booking by id, entered null value fields not updated")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Booking updated successfully"),
+        @ApiResponse(responseCode = "400", 
+                description = "Invalid request body: payload validation failed",
+                content = @Content(schema = @Schema(implementation = ApiError.class))),
+        @ApiResponse(responseCode = "404", 
+                description = "Booking not found / LessonType, StartDatetime or customer not found",
+                content = @Content(schema = @Schema(implementation = ApiError.class)))
+})
+    public void updateBooking(@PathVariable Integer id, @RequestBody @Valid BookingDto bookingDto) {
+        bookingService.updateBooking(id, bookingDto);
+    }
+}

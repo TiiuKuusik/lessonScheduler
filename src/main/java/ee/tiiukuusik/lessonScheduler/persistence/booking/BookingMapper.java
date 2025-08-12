@@ -34,4 +34,9 @@ public interface BookingMapper {
     @Mapping(ignore = true, target = "lessonType")
     @Mapping(ignore = true, target = "customer")
     Booking toBooking(BookingDto bookingDto);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @InheritConfiguration(name="toBooking")
+    @Mapping(source = "status", target = "status")
+    Booking updateBooking(BookingDto bookingDto, @MappingTarget Booking booking);
 }
