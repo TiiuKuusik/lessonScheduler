@@ -1,12 +1,9 @@
 package ee.tiiukuusik.lessonscheduler.controller.booking.dto;
-
 import ee.tiiukuusik.lessonscheduler.persistence.booking.Booking;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -20,13 +17,12 @@ import java.time.Instant;
 public class BookingDto implements Serializable {
     @NotNull
     private Instant bookingDate;
-//    @NotNull
-//    @Size(max = 20)
-//    private String status;
     @NotNull
     private Instant startDatetime;
     @NotNull
     private String lessonType;
     @NotNull
     private String customer;
+    @NotNull
+    private String status;
 }
