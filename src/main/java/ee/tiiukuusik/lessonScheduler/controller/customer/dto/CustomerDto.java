@@ -12,7 +12,6 @@ import java.io.Serializable;
  */
 @Value
 public class CustomerDto implements Serializable {
-    Integer id;
     @NotNull
     @Size(max = 50)
     String firstName;

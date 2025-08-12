@@ -2,13 +2,12 @@ package ee.tiiukuusik.lessonscheduler.service.timeslot;
 
 
 import ee.tiiukuusik.lessonscheduler.controller.timeslot.dto.TimeSlotDto;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.error.Error;
 import ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception.DataNotFoundException;
 import ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception.ForbiddenException;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlot;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotMapper;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotRepository;
-import ee.tiiukuusik.lessonscheduler.infrastructure.rest.error.Error;
-import ee.tiiukuusik.lessonscheduler.service.booking.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
