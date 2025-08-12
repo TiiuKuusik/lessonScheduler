@@ -75,7 +75,7 @@ public class BookingService {
         bookingRepository.deleteById(id);
     }
 
-    private Booking getValidBooking(Integer id) {
+    public Booking getValidBooking(Integer id) {
         return bookingRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(Error.BOOKING_DOES_NOT_EXIST.getMessage()));
     }

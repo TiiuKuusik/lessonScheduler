@@ -3,10 +3,12 @@ package ee.tiiukuusik.lessonscheduler.service.timeslot;
 
 import ee.tiiukuusik.lessonscheduler.controller.timeslot.dto.TimeSlotDto;
 import ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception.DataNotFoundException;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception.ForbiddenException;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlot;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotMapper;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotRepository;
 import ee.tiiukuusik.lessonscheduler.infrastructure.rest.error.Error;
+import ee.tiiukuusik.lessonscheduler.service.booking.BookingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +40,13 @@ public class TimeSlotService {
         timeSlotRepository.save(updatedTimeSlot);
     }
 
-    public void deleteTimeSlot(Integer id) {
-        timeSlotRepository.deleteById(id);
+    public void deleteAvailableTimeSlot(Integer id) {
+    TimeSlot timeSlot = timeSlotRepository.findById(id)
+            .orElseThrow(() -> new DataNotFoundException(Error.TIME_SLOT_DOES_NOT_EXIST.getMessage()));
+            
+    if (Boolean.FALSE.equals(timeSlot.getIsAvailable())) {
+        throw new ForbiddenException(Error.TIME_SLOT_IS_BOOKED.getMessage());
+    }
+    timeSlotRepository.deleteById(id);
     }
 }

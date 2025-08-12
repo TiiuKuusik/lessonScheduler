@@ -28,14 +28,14 @@ public class TimeSlotController {
         timeSlotService.addTimeSlot(timeSlotDto);
     }
 
-    @GetMapping("/all-timeslots")
+    @GetMapping("/timeslots/all")
     @Operation(summary = "Get all time slots", description = "Returns all time slots from the database")
     @ApiResponse(responseCode = "200", description = "Time slots fetched successfully")
     public List<TimeSlotDto> getAllTimeSlots() {
         return timeSlotService.getAllTimeSlots();
     }
 
-    @PutMapping("/timeslot{id}")
+    @PutMapping("/timeslot/{id}")
     @Operation(summary = "Update a time slot", description = "Updates a time slot by id")
     @ApiResponse(responseCode = "200", description = "Time slot updated successfully")
     @ApiResponse(responseCode = "400",
@@ -48,11 +48,11 @@ public class TimeSlotController {
         timeSlotService.updateTimeSlot(id, timeSlotDto);
     }
 
-    @DeleteMapping("/timeslot{id}")
+    @DeleteMapping("/timeslot/{id}")
     @Operation(summary = "Delete time slot", description = "Deletes time slot from the database")
     @ApiResponse(responseCode = "200", description = "Time slot deleted successfully")
-    public void deleteTimeSlot(@PathVariable Integer id) {
-        timeSlotService.deleteTimeSlot(id);
+    public void deleteAvailableTimeSlot(@PathVariable Integer id) {
+        timeSlotService.deleteAvailableTimeSlot(id);
     }
 
 
