@@ -27,8 +27,6 @@ public interface BookingMapper {
     List<BookingInfo> toBookingInfos(List<Booking> bookings);
 
 
-
-    //@Mapping(source = "status", target = "status")
     @Mapping(source = "bookingDate", target = "bookingDate")
     @Mapping(ignore = true, target = "timeSlot")
     @Mapping(ignore = true, target = "lessonType")
