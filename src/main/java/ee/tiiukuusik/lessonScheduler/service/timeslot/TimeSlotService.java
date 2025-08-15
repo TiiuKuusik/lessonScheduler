@@ -35,7 +35,7 @@ public class TimeSlotService {
         TimeSlot existingTimeSlot = timeSlotRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(Error.TIME_SLOT_DOES_NOT_EXIST.getMessage()));
         TimeSlot updatedTimeSlot = timeSlotMapper.toTimeSlot(timeSlotDto);
-        updatedTimeSlot.setId(existingTimeSlot.getId()); // Preserve the ID
+        updatedTimeSlot.setId(existingTimeSlot.getId());
         timeSlotRepository.save(updatedTimeSlot);
     }
 

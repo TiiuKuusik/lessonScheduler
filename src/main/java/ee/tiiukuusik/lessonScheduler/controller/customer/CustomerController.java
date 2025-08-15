@@ -37,7 +37,7 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
     
-    @GetMapping("/customers")
+    @GetMapping("/customer/all")
     @Operation(summary = "Get all customers", description = "Retrieves all customers from the database")
     @ApiResponse(responseCode = "200", description = "List of customers retrieved successfully")
     public List<CustomerDto> getAllCustomers() {
@@ -48,10 +48,11 @@ public class CustomerController {
     @Operation(summary = "Update customer", description = "Updates an existing customer")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Customer updated successfully"),
+        @ApiResponse(responseCode = "400", description = "Invalid request body: payload validation failed"),
         @ApiResponse(responseCode = "404", description = "Customer not found")
     })
-    public CustomerDto updateCustomer(@PathVariable Integer id, @RequestBody @Valid CustomerDto customerDto) {
-        return customerService.updateCustomer(id, customerDto);
+    public void updateCustomer(@PathVariable Integer id, @RequestBody @Valid CustomerDto customerDto) {
+        customerService.updateCustomer(id, customerDto);
     }
     
     @DeleteMapping("/customer/{id}")

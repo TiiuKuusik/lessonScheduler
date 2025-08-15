@@ -50,8 +50,8 @@ public class LessonTypeController {
         @ApiResponse(responseCode = "200", description = "Lesson type updated successfully"),
         @ApiResponse(responseCode = "404", description = "Lesson type not found")
     })
-    public LessonTypeDto updateLessonType(@PathVariable Integer id, @RequestBody @Valid LessonTypeDto lessonTypeDto) {
-        return lessonTypeService.updateLessonType(id, lessonTypeDto);
+    public void updateLessonType(@PathVariable Integer id, @RequestBody @Valid LessonTypeDto lessonTypeDto) {
+        lessonTypeService.updateLessonType(id, lessonTypeDto);
     }
     
     @DeleteMapping("/lesson-type/{id}")

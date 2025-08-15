@@ -5,6 +5,7 @@ import ee.tiiukuusik.lessonscheduler.infrastructure.rest.exception.DataNotFoundE
 import ee.tiiukuusik.lessonscheduler.persistence.lessontype.LessonType;
 import ee.tiiukuusik.lessonscheduler.persistence.lessontype.LessonTypeMapper;
 import ee.tiiukuusik.lessonscheduler.persistence.lessontype.LessonTypeRepository;
+import ee.tiiukuusik.lessonscheduler.infrastructure.rest.error.Error;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class LessonTypeService {
     
     public LessonTypeDto getLessonTypeById(Integer id) {
         LessonType lessonType = lessonTypeRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Lesson type not found with id: " + id));
+                .orElseThrow(() -> new DataNotFoundException(Error.LESSON_TYPE_DOES_NOT_EXIST.getMessage()));
         return lessonTypeMapper.toLessonTypeDto(lessonType);
     }
     
@@ -32,21 +33,20 @@ public class LessonTypeService {
         return lessonTypeMapper.toLessonTypeDtos(lessonTypes);
     }
     
-    public LessonTypeDto updateLessonType(Integer id, LessonTypeDto lessonTypeDto) {
+    public void updateLessonType(Integer id, LessonTypeDto lessonTypeDto) {
         LessonType existingLessonType = lessonTypeRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException("Lesson type not found with id: " + id));
-        
-        // Update the existing lesson type with values from the DTO
+                .orElseThrow(() -> new DataNotFoundException(Error.LESSON_TYPE_DOES_NOT_EXIST.getMessage()));
+
         LessonType updatedLessonType = lessonTypeMapper.toLessonType(lessonTypeDto);
         updatedLessonType.setId(existingLessonType.getId());
         
         LessonType savedLessonType = lessonTypeRepository.save(updatedLessonType);
-        return lessonTypeMapper.toLessonTypeDto(savedLessonType);
+        lessonTypeMapper.toLessonTypeDto(savedLessonType);
     }
     
     public void deleteLessonType(Integer id) {
         if (!lessonTypeRepository.existsById(id)) {
-            throw new DataNotFoundException("Lesson type not found with id: " + id);
+            throw new DataNotFoundException(Error.LESSON_TYPE_DOES_NOT_EXIST.getMessage());
         }
         lessonTypeRepository.deleteById(id);
     }
