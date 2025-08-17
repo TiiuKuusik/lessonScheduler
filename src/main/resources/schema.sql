@@ -2,15 +2,6 @@
 -- Last modification date: 2025-08-05 08:39:15.783
 -- Alternative HSQLDB schema with different identity syntax
 -- tables
--- Table: booking
-CREATE TABLE booking (
-                         id int GENERATED ALWAYS AS IDENTITY (START WITH 1) NOT NULL,
-                         booking_date TIMESTAMP NOT NULL,
-                         status VARCHAR(20) NOT NULL,
-                         time_slot_id INTEGER NOT NULL,
-                         lesson_type_id INTEGER NOT NULL,
-                         customer_id INTEGER NOT NULL
-);
 
 -- Table: lesson_type
 CREATE TABLE lesson_type (
@@ -39,6 +30,15 @@ CREATE TABLE customer (
                         email varchar(100) NOT NULL,
                         role varchar(10) NOT NULL,
                         CONSTRAINT customer_ak_1 UNIQUE (phone)
+);
+-- Table: booking
+CREATE TABLE booking (
+                         id int GENERATED ALWAYS AS IDENTITY (START WITH 1) NOT NULL,
+                         booking_date TIMESTAMP NOT NULL,
+                         status VARCHAR(20) NOT NULL,
+                         time_slot_id INTEGER NOT NULL,
+                         lesson_type_id INTEGER NOT NULL,
+                         customer_id INTEGER NOT NULL
 );
 
 -- foreign keys

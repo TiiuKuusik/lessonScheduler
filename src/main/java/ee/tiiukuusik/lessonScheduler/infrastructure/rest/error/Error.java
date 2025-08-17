@@ -3,6 +3,8 @@ package ee.tiiukuusik.lessonscheduler.infrastructure.rest.error;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.security.cert.CertificateRevokedException;
+
 @AllArgsConstructor
 @Getter
 public enum Error {
@@ -12,6 +14,7 @@ public enum Error {
     TIME_SLOT_IS_BOOKED("Time slot is booked"),
     TIME_SLOT_DOES_NOT_EXIST("Time slot with entered id does not exist"),
     CUSTOMER_HAS_ACTIVE_BOOKINGS("Customer cannot be deleted because of pending or confirmed bookings"),
-    CUSTOMER_DOES_NOT_EXIST("Customer does not exist");
+    CUSTOMER_DOES_NOT_EXIST("Customer does not exist"),
+    LESSON_TYPE_HAS_ACTIVE_BOOKINGS("Lesson type cannot be deleted because of pending or confirmed bookings");
     private final String message;
 }

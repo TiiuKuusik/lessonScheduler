@@ -22,6 +22,12 @@ public class TimeSlotService {
         timeSlotRepository.save(timeSlot);
     }
 
+    public TimeSlotDto getTimeSlot(Integer id) {
+        TimeSlot timeSlot = timeSlotRepository.findById(id)
+                .orElseThrow(() -> new DataNotFoundException(Error.TIME_SLOT_DOES_NOT_EXIST.getMessage()));
+        return timeSlotMapper.toTimeSlotDto(timeSlot);
+    }
+
     public List<TimeSlotDto> getAllTimeSlots() {
         List<TimeSlot> timeSlots = timeSlotRepository.findAll();
         return timeSlotMapper.toTimeSlotDtos(timeSlots);

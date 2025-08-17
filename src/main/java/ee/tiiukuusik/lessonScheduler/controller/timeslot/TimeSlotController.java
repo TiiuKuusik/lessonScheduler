@@ -27,6 +27,12 @@ public class TimeSlotController {
         timeSlotService.addTimeSlot(timeSlotDto);
     }
 
+    @GetMapping("/timeslot/{id}")
+    @Operation(summary = "Get time slot by ID", description = "Returns a time slot by its ID")
+    public TimeSlotDto getTimeSlot(@PathVariable Integer id) {
+        return timeSlotService.getTimeSlot(id);
+    }
+
     @GetMapping("/timeslots/all")
     @Operation(summary = "Get all time slots", description = "Returns all time slots from the database")
     @ApiResponse(responseCode = "200", description = "Time slots fetched successfully")

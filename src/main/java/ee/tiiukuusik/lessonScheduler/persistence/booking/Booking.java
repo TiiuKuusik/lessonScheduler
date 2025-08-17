@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -24,7 +24,7 @@ public class Booking {
 
     @NotNull
     @Column(name = "BOOKING_DATE", nullable = false)
-    private Instant bookingDate;
+    private LocalDateTime bookingDate;
 
     @Size(max = 20)
     @NotNull

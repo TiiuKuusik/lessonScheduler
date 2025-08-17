@@ -1,11 +1,12 @@
 package ee.tiiukuusik.lessonscheduler.controller.booking.dto;
 import ee.tiiukuusik.lessonscheduler.persistence.booking.Booking;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 
 /**
@@ -15,14 +16,17 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookingDto implements Serializable {
+
     @NotNull
-    private Instant bookingDate;
-    @NotNull
-    private Instant startDatetime;
+    @Schema(type = "string", format = "date-time", example = "2025-10-26T09:00:00")
+    private LocalDateTime startDatetime;
+
     @NotNull
     private String lessonType;
+
     @NotNull
-    private String customer;
+    private String customerEmail;
+
     @NotNull
     private String status;
 }

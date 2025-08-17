@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -19,11 +19,11 @@ public class TimeSlot {
 
     @NotNull
     @Column(name = "START_DATETIME", nullable = false)
-    private Instant startDatetime;
+    private LocalDateTime startDatetime;
 
     @NotNull
     @Column(name = "END_DATETIME", nullable = false)
-    private Instant endDatetime;
+    private LocalDateTime endDatetime;
 
     @NotNull
     @Column(name = "IS_AVAILABLE", nullable = false)

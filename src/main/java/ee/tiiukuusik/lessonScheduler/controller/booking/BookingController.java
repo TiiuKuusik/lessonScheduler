@@ -68,6 +68,8 @@ public class BookingController {
     }
 
     @DeleteMapping("booking/{id}")
+    @Operation(summary = "Delete booking by id", description = "Deletes booking by id")
+    @ApiResponse(responseCode = "200", description = "Booking deleted successfully")
     public void deleteBooking(@PathVariable Integer id) {
         bookingService.deleteBooking(id);
     }

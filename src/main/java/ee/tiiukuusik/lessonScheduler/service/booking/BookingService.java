@@ -16,7 +16,7 @@ import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlot;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -32,12 +32,13 @@ public class BookingService {
     public void addBooking(BookingDto bookingDto) {
         TimeSlot timeSlot = getAvailableTimeSlot(bookingDto.getStartDatetime());
         LessonType lessonType = getValidLessonType(bookingDto.getLessonType());
-        Customer customer = getValidCustomer(bookingDto.getCustomer());
+        Customer customer = getValidCustomer(bookingDto.getCustomerEmail());
         Booking booking = bookingMapper.toBooking(bookingDto);
         booking.setTimeSlot(timeSlot);
         booking.setLessonType(lessonType);
         booking.setCustomer(customer);
         booking.setStatus("pending");
+        booking.setBookingDate(LocalDateTime.now());
         timeSlot.setIsAvailable(false);
         timeSlotRepository.save(timeSlot);
         bookingRepository.save(booking);
@@ -56,7 +57,7 @@ public class BookingService {
     public void updateBooking(Integer id, BookingDto bookingDto) {
         Booking booking = getValidBooking(id);
         TimeSlot timeSlot = getAvailableTimeSlot(bookingDto.getStartDatetime());
-        Customer customer = getValidCustomer(bookingDto.getCustomer());
+        Customer customer = getValidCustomer(bookingDto.getCustomerEmail());
         LessonType lessonType = getValidLessonType(bookingDto.getLessonType());
         bookingMapper.updateBooking(bookingDto, booking);
         booking.setTimeSlot(timeSlot);
@@ -76,7 +77,7 @@ public class BookingService {
                 .orElseThrow(() -> new DataNotFoundException(Error.BOOKING_DOES_NOT_EXIST.getMessage()));
     }
 
-    private TimeSlot getAvailableTimeSlot(Instant startDatetime) {
+    private TimeSlot getAvailableTimeSlot(LocalDateTime startDatetime) {
         TimeSlot timeSlot = timeSlotRepository.findByStartDatetime(startDatetime)
                 .orElseThrow(() -> new DataNotFoundException(Error.START_TIME_DOES_NOT_EXIST.getMessage()));
         if (Boolean.FALSE.equals(timeSlot.getIsAvailable())) {
