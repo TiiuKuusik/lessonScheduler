@@ -3,8 +3,6 @@ package ee.tiiukuusik.lessonscheduler.infrastructure.rest.error;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.security.cert.CertificateRevokedException;
-
 @AllArgsConstructor
 @Getter
 public enum Error {
