@@ -8,7 +8,6 @@ import ee.tiiukuusik.lessonscheduler.persistence.lessontype.LessonTypeRepository
 import ee.tiiukuusik.lessonscheduler.infrastructure.rest.error.Error;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -36,10 +35,8 @@ public class LessonTypeService {
     public void updateLessonType(Integer id, LessonTypeDto lessonTypeDto) {
         LessonType existingLessonType = lessonTypeRepository.findById(id)
                 .orElseThrow(() -> new DataNotFoundException(Error.LESSON_TYPE_DOES_NOT_EXIST.getMessage()));
-
         LessonType updatedLessonType = lessonTypeMapper.toLessonType(lessonTypeDto);
         updatedLessonType.setId(existingLessonType.getId());
-        
         LessonType savedLessonType = lessonTypeRepository.save(updatedLessonType);
         lessonTypeMapper.toLessonTypeDto(savedLessonType);
     }

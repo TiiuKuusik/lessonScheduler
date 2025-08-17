@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -54,6 +53,4 @@ public class TimeSlotController {
     public void deleteAvailableTimeSlot(@PathVariable Integer id) {
         timeSlotService.deleteAvailableTimeSlot(id);
     }
-
-
 }

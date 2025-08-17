@@ -29,19 +29,15 @@ public class BookingService {
     private final LessonTypeRepository lessonTypeRepository;
     private final CustomerRepository customerRepository;
 
-
     public void addBooking(BookingDto bookingDto) {
         TimeSlot timeSlot = getAvailableTimeSlot(bookingDto.getStartDatetime());
         LessonType lessonType = getValidLessonType(bookingDto.getLessonType());
         Customer customer = getValidCustomer(bookingDto.getCustomer());
-
         Booking booking = bookingMapper.toBooking(bookingDto);
         booking.setTimeSlot(timeSlot);
         booking.setLessonType(lessonType);
         booking.setCustomer(customer);
         booking.setStatus("pending");
-
-        // Set the time slot as not available
         timeSlot.setIsAvailable(false);
         timeSlotRepository.save(timeSlot);
         bookingRepository.save(booking);

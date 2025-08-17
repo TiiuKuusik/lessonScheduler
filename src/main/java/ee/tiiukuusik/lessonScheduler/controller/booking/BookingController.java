@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -39,7 +38,7 @@ public class BookingController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Booking found successfully"),
             @ApiResponse(responseCode = "404", description = "Booking not found",
-            content = @Content(schema = @Schema(implementation = ApiError.class))),
+                    content = @Content(schema = @Schema(implementation = ApiError.class))),
     })
     public BookingDto findBooking(@PathVariable Integer id) {
         return bookingService.findBooking(id);
@@ -50,21 +49,20 @@ public class BookingController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Bookings returned successfully")})
     public List<BookingInfo> findAllBookings() {
-            return bookingService.findAllBookings();
-            }
-
+        return bookingService.findAllBookings();
+    }
 
     @PutMapping("booking/{id}")
     @Operation(summary = "Update booking by id", description = "Updates booking by id, entered null value fields not updated")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Booking updated successfully"),
-        @ApiResponse(responseCode = "400", 
-                description = "Invalid request body: payload validation failed",
-                content = @Content(schema = @Schema(implementation = ApiError.class))),
-        @ApiResponse(responseCode = "404", 
-                description = "Booking not found / LessonType, StartDatetime or customer not found",
-                content = @Content(schema = @Schema(implementation = ApiError.class)))
-})
+            @ApiResponse(responseCode = "200", description = "Booking updated successfully"),
+            @ApiResponse(responseCode = "400",
+                    description = "Invalid request body: payload validation failed",
+                    content = @Content(schema = @Schema(implementation = ApiError.class))),
+            @ApiResponse(responseCode = "404",
+                    description = "Booking not found / LessonType, StartDatetime or customer not found",
+                    content = @Content(schema = @Schema(implementation = ApiError.class)))
+    })
     public void updateBooking(@PathVariable Integer id, @RequestBody @Valid BookingDto bookingDto) {
         bookingService.updateBooking(id, bookingDto);
     }
@@ -72,7 +70,5 @@ public class BookingController {
     @DeleteMapping("booking/{id}")
     public void deleteBooking(@PathVariable Integer id) {
         bookingService.deleteBooking(id);
-
     }
-
 }

@@ -3,29 +3,23 @@ package ee.tiiukuusik.lessonscheduler.persistence.booking;
 import ee.tiiukuusik.lessonscheduler.controller.booking.dto.BookingDto;
 import ee.tiiukuusik.lessonscheduler.controller.booking.dto.BookingInfo;
 import org.mapstruct.*;
-
 import java.util.List;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface BookingMapper {
 
-
-
     @Mapping(source = "bookingDate", target = "bookingDate")
     @Mapping(source = "lessonType.typeName", target = "lessonType")
-    //@Mapping(source = "status", target = "status")
+    @Mapping(source = "status", target = "status")
     @Mapping(source = "timeSlot.startDatetime", target = "startDatetime")
     @Mapping(source = "customer.email", target = "customer")
     BookingDto toBookingDto(Booking booking);
-
 
     @InheritConfiguration(name="toBookingDto")
     @Mapping(source ="id", target = "bookingId")
     BookingInfo toBookingInfo(Booking booking);
 
-
     List<BookingInfo> toBookingInfos(List<Booking> bookings);
-
 
     @Mapping(source = "bookingDate", target = "bookingDate")
     @Mapping(ignore = true, target = "timeSlot")
@@ -36,5 +30,5 @@ public interface BookingMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @InheritConfiguration(name="toBooking")
     @Mapping(source = "status", target = "status")
-    Booking updateBooking(BookingDto bookingDto, @MappingTarget Booking booking);
+    void updateBooking(BookingDto bookingDto, @MappingTarget Booking booking);
 }

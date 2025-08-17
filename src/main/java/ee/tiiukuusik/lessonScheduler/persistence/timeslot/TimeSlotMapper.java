@@ -11,8 +11,5 @@ public interface TimeSlotMapper {
 TimeSlotDto toTimeSlotDto(TimeSlot timeSlot);
 
 TimeSlot toTimeSlot(TimeSlotDto timeSlotDto);
-
-List<TimeSlotDto> toDtoList(List<TimeSlot> timeSlots);
-
-List<TimeSlot> toTimeSlotList(List<TimeSlotDto> timeSlotDtos);
+List<TimeSlotDto> toTimeSlotDtos(List<TimeSlot> timeSlots);
 }
