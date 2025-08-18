@@ -5,31 +5,34 @@
 
 -- Table: lesson_type
 CREATE TABLE lesson_type (
-                             id INTEGER IDENTITY PRIMARY KEY,
+                             id int GENERATED ALWAYS AS IDENTITY (START WITH 1) NOT NULL,
                              type_name varchar(20) NOT NULL,
                              price decimal(10,2) NOT NULL,
                              description varchar(100) NOT NULL,
                              duration_minutes int NOT NULL,
-                             CONSTRAINT lesson_type_ak_1 UNIQUE (type_name)
+                             CONSTRAINT lesson_type_ak_1 UNIQUE (type_name),
+                             CONSTRAINT lesson_type_pk PRIMARY KEY (id)
 );
 
 -- Table: time_slot
 CREATE TABLE time_slot (
-                           id INTEGER IDENTITY PRIMARY KEY,
+                           id int GENERATED ALWAYS AS IDENTITY (START WITH 1) NOT NULL,
                            start_datetime timestamp NOT NULL,
                            end_datetime timestamp NOT NULL,
                            is_available boolean NOT NULL,
+                           CONSTRAINT time_slot_pk PRIMARY KEY (id)
 );
 
 -- Table: customer
 CREATE TABLE customer (
-                        id INTEGER IDENTITY PRIMARY KEY,
+                        id int GENERATED ALWAYS AS IDENTITY (START WITH 1) NOT NULL,
                         first_name varchar(50) NOT NULL,
                         last_name varchar(50) NOT NULL,
                         phone varchar(50) NOT NULL,
                         email varchar(100) NOT NULL,
                         role varchar(10) NOT NULL,
-                        CONSTRAINT customer_ak_1 UNIQUE (phone)
+                        CONSTRAINT customer_ak_1 UNIQUE (phone),
+                        CONSTRAINT customer_pk PRIMARY KEY (id)
 );
 -- Table: booking
 CREATE TABLE booking (
@@ -38,7 +41,8 @@ CREATE TABLE booking (
                          status VARCHAR(20) NOT NULL,
                          time_slot_id INTEGER NOT NULL,
                          lesson_type_id INTEGER NOT NULL,
-                         customer_id INTEGER NOT NULL
+                         customer_id INTEGER NOT NULL,
+                         CONSTRAINT booking_pk PRIMARY KEY (id)
 );
 
 -- foreign keys
