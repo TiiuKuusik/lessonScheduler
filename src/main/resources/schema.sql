@@ -32,6 +32,7 @@ CREATE TABLE customer (
                         email varchar(100) NOT NULL,
                         role varchar(10) NOT NULL,
                         CONSTRAINT customer_ak_1 UNIQUE (phone),
+                        CONSTRAINT customer_ak_2 UNIQUE (email),
                         CONSTRAINT customer_pk PRIMARY KEY (id)
 );
 -- Table: booking
