@@ -13,6 +13,8 @@ public enum Error {
     TIME_SLOT_DOES_NOT_EXIST("Time slot with entered id does not exist"),
     CUSTOMER_HAS_ACTIVE_BOOKINGS("Customer cannot be deleted because of pending or confirmed bookings"),
     CUSTOMER_DOES_NOT_EXIST("Customer does not exist"),
+    CUSTOMER_EMAIL_ALREADY_EXISTS("Customer with entered email already exists"),
+    CUSTOMER_PHONE_NUMBER_ALREADY_EXISTS("Customer with entered phone number already exists"),
     LESSON_TYPE_HAS_ACTIVE_BOOKINGS("Lesson type cannot be deleted because of pending or confirmed bookings");
     private final String message;
 }

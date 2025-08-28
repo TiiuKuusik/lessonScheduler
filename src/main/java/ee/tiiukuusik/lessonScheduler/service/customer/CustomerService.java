@@ -11,6 +11,7 @@ import ee.tiiukuusik.lessonscheduler.persistence.customer.CustomerMapper;
 import ee.tiiukuusik.lessonscheduler.persistence.customer.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -22,13 +23,13 @@ public class CustomerService {
     private final BookingRepository bookingRepository;
 
     public void addCustomer(CustomerDto customerDto) {
+        checkUniqueFields(customerDto);
         Customer customer = customerMapper.toCustomer(customerDto);
         customerRepository.save(customer);
     }
 
     public CustomerDto getCustomerById(Integer id) {
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(Error.CUSTOMER_DOES_NOT_EXIST.getMessage()));
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> new DataNotFoundException(Error.CUSTOMER_DOES_NOT_EXIST.getMessage()));
         return customerMapper.toCustomerDto(customer);
     }
 
@@ -38,8 +39,7 @@ public class CustomerService {
     }
 
     public void updateCustomer(Integer id, CustomerDto customerDto) {
-        Customer existingCustomer = customerRepository.findById(id)
-                .orElseThrow(() -> new DataNotFoundException(Error.CUSTOMER_DOES_NOT_EXIST.getMessage()));
+        Customer existingCustomer = customerRepository.findById(id).orElseThrow(() -> new DataNotFoundException(Error.CUSTOMER_DOES_NOT_EXIST.getMessage()));
         Customer updatedCustomer = customerMapper.toCustomer(customerDto);
         updatedCustomer.setId(existingCustomer.getId());
         customerRepository.save(updatedCustomer);
@@ -53,9 +53,7 @@ public class CustomerService {
 
     private void checkActiveBookings(Integer id) {
         List<Booking> customerBookings = bookingRepository.findByCustomerId(id);
-        boolean hasActiveBookings = customerBookings.stream()
-                .anyMatch(booking -> "pending".equals(booking.getStatus())
-                        || "confirmed".equals(booking.getStatus()));
+        boolean hasActiveBookings = customerBookings.stream().anyMatch(booking -> "pending".equals(booking.getStatus()) || "confirmed".equals(booking.getStatus()));
         if (hasActiveBookings) {
             throw new ForbiddenException(Error.CUSTOMER_HAS_ACTIVE_BOOKINGS.getMessage());
         }
@@ -64,6 +62,15 @@ public class CustomerService {
     private void checkCustomerExists(Integer id) {
         if (!customerRepository.existsById(id)) {
             throw new DataNotFoundException(Error.CUSTOMER_DOES_NOT_EXIST.getMessage());
+        }
+    }
+
+    private void checkUniqueFields(CustomerDto customerDto) {
+        if (customerRepository.existsByEmail(customerDto.getEmail())) {
+            throw new ForbiddenException(Error.CUSTOMER_EMAIL_ALREADY_EXISTS.getMessage());
+        }
+        if (customerRepository.existsByPhone(customerDto.getPhone())) {
+            throw new ForbiddenException(Error.CUSTOMER_PHONE_NUMBER_ALREADY_EXISTS.getMessage());
         }
     }
 }
