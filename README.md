@@ -2,6 +2,26 @@
 
 A Spring Boot application for managing lesson bookings and scheduling.
 
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Getting Started](#getting-started)
+   - [Prerequisites](#prerequisites)
+   - [Running the Application](#running-the-application)
+   - [API Documentation](#api-documentation)
+- [Database Configuration](#database-configuration)
+- [Data Model](#data-model)
+- [ERD diagram](#erd-diagram)
+- [Sample Data](#sample-data)
+- [API Endpoints](#api-endpoints)
+   - [Customer Endpoints](#customer-endpoints)
+   - [Booking Endpoints](#booking-endpoints)
+   - [Lesson Type Endpoints](#lesson-type-endpoints)
+   - [Time Slot Endpoints](#time-slot-endpoints)
+- [Project structure](#project-structure)
+
 ### Overview
 
 Lesson Scheduler is a REST API application that allows users to manage bookings for different types of lessons. The system handles time slots, lesson types, customers, and bookings, providing a complete solution for scheduling and managing lessons.
@@ -81,6 +101,7 @@ The application consists of four main entities:
 3. **LessonType**: Defines different types of lessons with prices and durations
 4. **Customer**: Stores customer information
 
+### ERD Diagram
 ![ERD Diagram](docs/ERD.png)
 
 ### Sample Data
@@ -92,3 +113,36 @@ The application is pre-loaded with sample data including:
 - Four bookings
 
 This sample data allows you to test the application immediately after startup.
+
+### API Endpoints
+
+#### Customer Endpoints
+- `POST /customer` - Add a new customer
+- `GET /customer/{id}` - Get customer by ID
+- `GET /customer/all` - Get all customers
+- `PUT /customer/{id}` - Update an existing customer
+- `DELETE /customer/{id}` - Delete a customer
+
+#### Booking Endpoints
+- `POST /booking` - Create a new booking
+- `GET /booking/{id}` - Get booking by ID
+- `GET /booking/all` - Get all bookings
+- `PUT /booking/{id}` - Update an existing booking
+- `DELETE /booking/{id}` - Delete a booking
+
+#### Lesson Type Endpoints
+- `POST /lessontype` - Add a new lesson type
+- `GET /lessontype/{id}` - Get lesson type by ID
+- `GET /lessontype/all` - Get all lesson types
+- `PUT /lessontype/{id}` - Update an existing lesson type
+- `DELETE /lessontype/{id}` - Delete a lesson type
+
+#### Time Slot Endpoints
+- `POST /timeslot` - Create a new time slot
+- `GET /timeslot/{id}` - Get time slot by ID
+- `GET /timeslot/all` - Get all time slots
+- `PUT /timeslot/{id}` - Update an existing time slot
+- `DELETE /timeslot/{id}` - Delete a time slot
+
+### Project structure
+The detailed project structure can be found in [lessonscheduler_structure.txt](docs/lessonscheduler_structure.txt)

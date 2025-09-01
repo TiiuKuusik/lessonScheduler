@@ -1,0 +1,57 @@
+lessonscheduler/
+├── controller/
+│   ├── booking/
+│   │   ├── dto/
+│   │   │   ├── BookingDto.java
+│   │   │   └── BookingInfo.java
+│   │   └── BookingController.java
+│   ├── customer/
+│   │   ├── dto/
+│   │   │   └── CustomerDto.java
+│   │   └── CustomerController.java
+│   ├── lessontype/
+│   │   ├── dto/
+│   │   │   └── LessonTypeDto.java
+│   │   └── LessonTypeController.java
+│   ├── timeslot/
+│       ├── dto/
+│       │   └── TimeSlotDto.java
+│       └── TimeSlotController.java
+├── infrastructure/
+│   ├── db/
+│   │   └── HsqlServerConfig.java
+│   ├── rest/
+│       ├── error/
+│       │   ├── ApiError.java
+│       │   └── Error.java
+│       ├── exception/
+│       │   ├── DataNotFoundException.java
+│       │   └── ForbiddenException.java
+│       └── RestExceptionHandler.java
+├── persistence/
+│   ├── booking/
+│   │   ├── Booking.java
+│   │   ├── BookingMapper.java
+│   │   └── BookingRepository.java
+│   ├── customer/
+│   │   ├── Customer.java
+│   │   ├── CustomerMapper.java
+│   │   └── CustomerRepository.java
+│   ├── lessontype/
+│   │   ├── LessonType.java
+│   │   ├── LessonTypeMapper.java
+│   │   └── LessonTypeRepository.java
+│   ├── timeslot/
+│       ├── TimeSlot.java
+│       ├── TimeSlotMapper.java
+│       └── TimeSlotRepository.java
+├── service/
+│   ├── booking/
+│   │   └── BookingService.java
+│   ├── customer/
+│   │   └── CustomerService.java
+│   ├── lessontype/
+│   │   └── LessonTypeService.java
+│   ├── timeslot/
+│       └── TimeSlotService.java
+└── LessonSchedulerApplication.java
