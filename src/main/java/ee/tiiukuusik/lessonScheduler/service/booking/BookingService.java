@@ -81,7 +81,7 @@ public class BookingService {
         TimeSlot timeSlot = timeSlotRepository.findByStartDatetime(startDatetime)
                 .orElseThrow(() -> new DataNotFoundException(Error.START_TIME_DOES_NOT_EXIST.getMessage()));
         if (Boolean.FALSE.equals(timeSlot.getIsAvailable())) {
-            throw new ForbiddenException("Requested Time slot is not available");
+            throw new ForbiddenException(Error.TIME_SLOT_IS_BOOKED.getMessage());
         }
         return timeSlot;
     }
