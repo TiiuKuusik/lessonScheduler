@@ -16,6 +16,8 @@ import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlot;
 import ee.tiiukuusik.lessonscheduler.persistence.timeslot.TimeSlotRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class BookingService {
     private final LessonTypeRepository lessonTypeRepository;
     private final CustomerRepository customerRepository;
 
+    @Transactional
     public void addBooking(BookingDto bookingDto) {
         TimeSlot timeSlot = getAvailableTimeSlot(bookingDto.getStartDatetime());
         LessonType lessonType = getValidLessonType(bookingDto.getLessonType());
@@ -54,21 +57,18 @@ public class BookingService {
         return bookingMapper.toBookingInfos(bookings);
     }
 
+    @Transactional
     public void updateBooking(Integer id, BookingDto bookingDto) {
-        Booking booking = getValidBooking(id);
-        TimeSlot timeSlot = getAvailableTimeSlot(bookingDto.getStartDatetime());
+        Booking existingBooking = getValidBooking(id);
         Customer customer = getValidCustomer(bookingDto.getCustomerEmail());
         LessonType lessonType = getValidLessonType(bookingDto.getLessonType());
-        bookingMapper.updateBooking(bookingDto, booking);
-        booking.setTimeSlot(timeSlot);
-        booking.setLessonType(lessonType);
-        booking.setCustomer(customer);
-        bookingRepository.save(booking);
+        TimeSlot updatedTimeSlot = handleTimeSlotUpdate(existingBooking, bookingDto.getStartDatetime());
+        updateBookingDetails(existingBooking, bookingDto, customer, lessonType, updatedTimeSlot);
     }
 
     public void deleteBooking(Integer id) {
         Booking booking = getValidBooking(id);
-        freeTimeSlotAfterDelete(booking.getTimeSlot());
+        releaseExistingTimeSlot(booking.getTimeSlot());
         bookingRepository.deleteById(id);
     }
 
@@ -78,12 +78,12 @@ public class BookingService {
     }
 
     private TimeSlot getAvailableTimeSlot(LocalDateTime startDatetime) {
-        TimeSlot timeSlot = timeSlotRepository.findByStartDatetime(startDatetime)
+        TimeSlot updatedTimeSlot = timeSlotRepository.findByStartDatetime(startDatetime)
                 .orElseThrow(() -> new DataNotFoundException(Error.START_TIME_DOES_NOT_EXIST.getMessage()));
-        if (Boolean.FALSE.equals(timeSlot.getIsAvailable())) {
+        if (Boolean.FALSE.equals(updatedTimeSlot.getIsAvailable())) {
             throw new ForbiddenException(Error.TIME_SLOT_IS_BOOKED.getMessage());
         }
-        return timeSlot;
+        return updatedTimeSlot;
     }
 
     private LessonType getValidLessonType(String typeName) {
@@ -96,8 +96,34 @@ public class BookingService {
                 .orElseThrow(() -> new DataNotFoundException(Error.CUSTOMER_DOES_NOT_EXIST.getMessage()));
     }
 
-    private void freeTimeSlotAfterDelete(TimeSlot timeSlot) {
+    private TimeSlot handleTimeSlotUpdate(Booking existingBooking, LocalDateTime newStartDateTime) {
+        TimeSlot existingTimeSlot = existingBooking.getTimeSlot();
+        if (isTimeSlotChangeRequested(existingTimeSlot, newStartDateTime)) {
+            TimeSlot updatedTimeSlot = getAvailableTimeSlot(newStartDateTime);
+            releaseExistingTimeSlot(existingTimeSlot);
+            updatedTimeSlot.setIsAvailable(false);
+            timeSlotRepository.save(updatedTimeSlot);
+            return updatedTimeSlot;
+        }
+        return existingTimeSlot;
+    }
+
+    private boolean isTimeSlotChangeRequested(TimeSlot existingTimeSlot, LocalDateTime newStartDateTime) {
+        return !existingTimeSlot.getStartDatetime().equals(newStartDateTime);
+    }
+
+    private void releaseExistingTimeSlot(TimeSlot timeSlot) {
         timeSlot.setIsAvailable(true);
         timeSlotRepository.save(timeSlot);
+    }
+
+    private void updateBookingDetails(Booking booking, BookingDto bookingDto,
+                                      Customer customer, LessonType lessonType,
+                                      TimeSlot timeSlot) {
+        bookingMapper.updateBooking(bookingDto, booking);
+        booking.setTimeSlot(timeSlot);
+        booking.setLessonType(lessonType);
+        booking.setCustomer(customer);
+        bookingRepository.save(booking);
     }
 }
